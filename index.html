@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <div class ="quiz- container">
+        <h1>Quiz</h1>
+        <hr>
+       <!-- Home page -->
+<div class="topics">
+  <div class="topic-card" onclick="startQuiz('music')">
+    <h3> Music</h3>
+    <p>5 Questions</p>
+    <section id="quiz-box" style="display:none">
+  <p id="q-count">Question 1 of 5</p>
+  <div class="progress-bar"><div id="progress"></div></div>
+  <h2 id="question-text"></h2>
+  <!-- JS will fill clickable divs here -->
+  <div id="options"></div>  
+  <p id="score">Score: 0</p>
+  <button id="next-btn">Next Question →</button>
+</section>
+  </div>
+  <div class="topic-card" onclick="startQuiz('movies')">
+    <h3> Movies</h3><section id="quiz-box" style="display:none">
+  <p id="q-count">Question 1 of 5</p>
+  <div class="progress-bar"><div id="progress"></div></div>
+  <h2 id="question-text"></h2>
+  
+<!-- JS will fill clickable divs here -->
+  <div id="options"></div>  
+  <button id="next-btn">Next Question →</button>
+</section><section id="quiz-box" style="display:none">
+  <p id="q-count">Question 1 of 5</p>
+  <div class="progress-bar"><div id="progress"></div></div>
+  <h2 id="question-text"></h2>
+  <!-- JS will fill clickable divs here -->
+  <div id="options"></div> 
+  <p id="score">Score: 0</p>
+  <button id="next-btn">Next Question →</button>
+</section>
+    <p>5 Questions</p>
+  </div>
+  <div class="topic-card" onclick="startQuiz('sports')">
+    <h3> Sports</h3>
+    <p>5 Questions</p>
+  </div>
+</div>
+<section id="result-box" style="display:none">
+  <h2>Quiz Complete!</h2>
+  <div id="final-score"></div>
+  <p id="final-text"></p>
+  <!-- For feedback when the quiz is complete -->
+  <div id="review"></div>
+  <button onclick="app.restartSame()">Retake Quiz</button>
+  <button onclick="app.goHome()">Choose Different Topic</button>
+</section>
+<script src="script.js"></script>
+</body>
+</html>
