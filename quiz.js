@@ -1,3 +1,4 @@
+console.log("JavaScript is working!");
 // OOP
 class Question {
   constructor(text, options, correctIndex) {
@@ -7,7 +8,7 @@ class Question {
   }
 }
 // Questions are now put in categories
-const quizData = {
+const quizData = { 
   music: [
     new Question(
       "Which music group was Beyonce in?",
@@ -89,3 +90,146 @@ const quizData = {
     ),
   ],
 };
+
+// Add variables
+let currentTopic = "";
+let currentQuestionIndex = 0;
+let score = 0;
+let selectedAnswer = null;
+
+function startQuiz(topic) {
+  console.log("Topic clicked:", topic);
+
+  if (!quizData[topic]) {
+    console.error("Quiz topic not found:", topic);
+    return;
+  }
+
+  currentTopic = topic;
+  currentQuestionIndex = 0;
+  score = 0;
+  selectedAnswer = null;
+
+  document.querySelector(".topics").style.display = "none";
+  document.getElementById("quiz-box").style.display = "block";
+  document.getElementById("result-box").style.display = "none";
+
+  showQuestion();
+}
+
+function showQuestion() {
+  const questions = quizData[currentTopic];
+  const questionData = questions[currentQuestionIndex];
+
+  document.getElementById("next-btn").disabled = true;
+
+  document.getElementById("q-count").textContent =
+    `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+
+  document.getElementById("question-text").textContent =
+    questionData.text;
+
+  const optionsContainer = document.getElementById("options");
+  optionsContainer.innerHTML = "";
+
+  questionData.options.forEach((option, index) => {
+    const button = document.createElement("button");
+
+    button.textContent = option;
+    button.className = "answer-option";
+
+    button.addEventListener("click", function () {
+      selectAnswer(index);
+    });
+
+    optionsContainer.appendChild(button);
+  });
+
+  document.getElementById("score").textContent = `Score: ${score}`;
+
+  document.getElementById("progress").style.width =
+    `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
+}
+
+function selectAnswer(index) {
+  const questions = quizData[currentTopic];
+  const question = questions[currentQuestionIndex];
+  const answerButtons = document.querySelectorAll(".answer-option");
+
+  answerButtons.forEach((button) => {
+    button.disabled = true;
+  });
+
+  if (index === question.correct) {
+    score++;
+    answerButtons[index].style.backgroundColor = "#d4edda";
+    answerButtons[index].style.color = "#155724";
+  } else {
+    answerButtons[index].style.backgroundColor = "#f8d7da";
+    answerButtons[index].style.color = "#721c24";
+
+    answerButtons[question.correct].style.backgroundColor = "#d4edda";
+    answerButtons[question.correct].style.color = "#155724";
+  }
+
+  document.getElementById("score").textContent = `Score: ${score}`;
+  selectedAnswer = index;
+  document.getElementById("next-btn").disabled = false;
+}
+
+function nextQuestion() {
+  const questions = quizData[currentTopic];
+
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex < questions.length) {
+    showQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  const questions = quizData[currentTopic];
+  const percentage = Math.round((score / questions.length) * 100);
+
+  document.getElementById("quiz-box").style.display = "none";
+  document.getElementById("result-box").style.display = "block";
+
+  document.getElementById("final-score").textContent =
+    `Your score: ${score} out of ${questions.length}`;
+
+  document.getElementById("final-text").textContent =
+    `You scored ${percentage}%.`;
+
+  const review = document.getElementById("review");
+  review.innerHTML = "<h3>Answer Review</h3>";
+
+  questions.forEach((question, index) => {
+    const item = document.createElement("p");
+
+    item.textContent =
+      `${index + 1}. ${question.text} Correct answer: ${question.options[question.correct]}`;
+
+    review.appendChild(item);
+  });
+}
+
+function restartQuiz() {
+  startQuiz(currentTopic);
+}
+
+function goHome() {
+  document.getElementById("result-box").style.display = "none";
+  document.getElementById("quiz-box").style.display = "none";
+  document.querySelector(".topics").style.display = "flex";
+}
+
+
+
+
+
+window.startQuiz = startQuiz;
+
+
+
