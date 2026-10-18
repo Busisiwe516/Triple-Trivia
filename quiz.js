@@ -1,4 +1,4 @@
-console.log("JavaScript is working!");
+
 // OOP
 class Question {
   constructor(text, options, correctIndex) {
@@ -34,6 +34,7 @@ const quizData = {
       "Which singer is known as the 'King of Pop'?",
       ["Elvis Presley", "Michael Jackson", "Prince"],
       1, // Michael Jackson is correct
+    ),
     ],
   movies: [
     new Question(
@@ -228,12 +229,6 @@ function goHome() {
   document.getElementById("quiz-box").style.display = "none";
   document.querySelector(".topics").style.display = "flex";
 }
-
-
-
-
-
-window.startQuiz = startQuiz;
 
 
 
