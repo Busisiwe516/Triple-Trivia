@@ -30,7 +30,11 @@ const quizData = {
       ["The Beatles", "The Black Eyed Peas", "Queen"],
       0, // The Beatles
     ),
-  ],
+    new Question(
+      "Which singer is known as the 'King of Pop'?",
+      ["Elvis Presley", "Michael Jackson", "Prince"],
+      1, // Michael Jackson is correct
+    ],
   movies: [
     new Question(
       "How many movies does Harry Potter have?",
